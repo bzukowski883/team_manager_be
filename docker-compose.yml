@@ -1,0 +1,52 @@
+# You must run the following command once before this will work
+# docker network create team-manager-net
+name: tm_be
+services:
+  mongo:
+    build:
+      context: ./mongo
+    container_name: mongo
+    restart: unless-stopped
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+
+    volumes:
+      - mongo_data_tm:/data/db
+      - mongo_config_tm:/data/configdb
+
+    networks:
+      - team_manager_net
+
+  rproxy:
+    build:
+      context: ./rproxy
+    ports:
+      - 8080:80
+    container_name: rproxy
+    restart: unless-stopped
+    networks:
+      - team_manager_net
+
+  server:
+    build:
+      context: ./server
+    container_name: server
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/usr/src/app
+      - node_modules_tm_server:/usr/src/app/node_modules
+    networks:
+      - team_manager_net
+
+networks:
+  team_manager_net:
+    external: true
+
+volumes:
+  mongo_data_tm:
+  mongo_config_tm:
+  node_modules_tm_server:
