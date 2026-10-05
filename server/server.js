@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const authRoutes = require("./routes/auth");
 require("dotenv").config();
 
 const app = express();
@@ -61,6 +62,4 @@ app.listen(PORT, () => {
 });
 
 // Connect to routes with Express
-const authRoutes = require("./routes/auth");
-
 app.use("/auth", authRoutes);
