@@ -1,5 +1,6 @@
 const express = require("express");
 const passport = require("passport");
+import hosts, {auth_server} from "../config/.host.config.js";
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get(
         failureRedirect: "/login"
     }),
     (req, res) => {
-        res.redirect("http://localhost:3000");
+        res.redirect(`${hosts.auth_server}:3000`);
     }
 );
 
