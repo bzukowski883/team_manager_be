@@ -5,7 +5,7 @@ users:
   _id: ObjectId
   username: string
   email: string
-  password: string # Hashed password, never plaintext
+  password: string 
   createdAt: datetime
 
 schedules:
@@ -13,6 +13,8 @@ schedules:
   userId: ObjectId # References users._id
   title: string
   description: string
+  startdate: datetime
+  enddate: datetime
   startTime: datetime
   endTime: datetime
   createdAt: datetime
@@ -23,7 +25,7 @@ tickets:
   description: string
   category: string # Flexible, user-defined category
   priority: string
-  assignedTo: ObjectId # References users._id; optional
+  assignedTo: ObjectId # References users._id;
   createdBy: ObjectId # References users._id
   dueDate: datetime # Optional
   createdAt: datetime
