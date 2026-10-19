@@ -32,7 +32,7 @@ services:
   server:
     build:
       context: ./server
-    container_name: server
+    command: sh -c "npm i && node server.js"
     restart: unless-stopped
     depends_on:
     - mongo
