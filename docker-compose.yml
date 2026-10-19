@@ -13,34 +13,34 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
 
     volumes:
-      - mongo_data_tm:/data/db
-      - mongo_config_tm:/data/configdb
+    - mongo_data_tm:/data/db
+    - mongo_config_tm:/data/configdb
 
     networks:
-      - team_manager_net
+    - team_manager_net
 
   rproxy:
     build:
       context: ./rproxy
     ports:
-      - 8080:80
+    - 8080:80
     container_name: rproxy
     restart: unless-stopped
     networks:
-      - team_manager_net
+    - team_manager_net
 
   server:
     build:
       context: ./server
-    container_name: server
+    command: sh -c "npm i && node server.js"
     restart: unless-stopped
     depends_on:
-      - mongo
+    - mongo
     volumes:
-      - ./server:/usr/src/app
-      - node_modules_tm_server:/usr/src/app/node_modules
+    - ./server:/usr/src/app
+    - node_modules_tm_server:/usr/src/app/node_modules
     networks:
-      - team_manager_net
+    - team_manager_net
 
 networks:
   team_manager_net:
