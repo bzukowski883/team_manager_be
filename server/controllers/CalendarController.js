@@ -14,4 +14,22 @@ export default class CalendarController{
             });
         }
   };
+
+    getEvents = async (req, res, next) => {
+        try{
+            const events = await this.CalendarService.getEvents();
+            res.status(200).json(events);
+        }catch(err){
+            next(err);
+        }
+    };
+
+    getEventById = async (req, res, next) => {
+        try {
+            const event = await this.calendarService.getEventById(req.params.id);
+            res.status(200).json(event);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
