@@ -11,4 +11,20 @@ export default class CalendarService{
         //if item something then change some data
         return item
     }
+
+    async getEvents(){
+        return this.CalendarRepository.findAll();
+    }
+
+    async getEventById(id){
+        const event = await this.CalendarRepository.findById(id);
+
+        if(!event) {
+            const error = new Error("Event not found");
+            error.status = 404;
+            throw error;
+        }
+
+        return event;
+    }
 }
