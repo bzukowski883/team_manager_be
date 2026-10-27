@@ -26,7 +26,7 @@ export default class CalendarController{
 
     getEventById = async (req, res, next) => {
         try {
-            const event = await this.calendarService.getEventById(req.params.id);
+            const event = await this.CalendarService.getEventById(req.params.id);
             res.status(200).json(event);
         } catch (error) {
             next(error);
