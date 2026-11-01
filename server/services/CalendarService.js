@@ -19,6 +19,7 @@ export default class CalendarService{
     async getEventById(id){
         const event = await this.CalendarRepository.findById(id);
 
+        //if item doesn't exist then return 404 error
         if(!event) {
             const error = new Error("Event not found");
             error.status = 404;
