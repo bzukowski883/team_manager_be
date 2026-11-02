@@ -6,5 +6,9 @@ export default function(CalendarController){
   // GET /api/calendar/example
   router.get("/example", CalendarController.getExampleTwo);
 
+  router.get("/events", CalendarController.getEvents);
+
+  router.get("/events/:id", CalendarController.getEventById);
+
   return router
 }
