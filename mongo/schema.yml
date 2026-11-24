@@ -1,0 +1,48 @@
+# MongoDB Data Structure Mockup
+# This file is a temporary reference
+
+users:
+  _id: ObjectId
+  username: string
+  email: string
+  password: string 
+  createdAt: datetime
+
+schedules:
+  _id: ObjectId
+  userId: ObjectId # References users._id
+  title: string
+  description: string
+  startdate: datetime
+  enddate: datetime
+  startTime: datetime
+  endTime: datetime
+  createdAt: datetime
+
+tickets:
+  _id: ObjectId
+  title: string
+  description: string
+  category: string # Flexible, user-defined category
+  priority: string
+  assignedTo: ObjectId # References users._id;
+  createdBy: ObjectId # References users._id
+  dueDate: datetime # Optional
+  createdAt: datetime
+  updatedAt: datetime
+
+files:
+  _id: ObjectId
+  fileName: string
+  fileType: string
+  fileSize: number
+  uploadedBy: ObjectId # References users._id
+  uploadDate: datetime
+  storageLocation: string # Location or identifier for the actual file
+
+messages:
+  _id: ObjectId
+  userId: ObjectId # References users._id
+  username: string
+  message: string
+  createdAt: datetime
